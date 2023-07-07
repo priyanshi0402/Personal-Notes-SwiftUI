@@ -9,9 +9,16 @@ import SwiftUI
 
 @main
 struct Personal_NotesApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    let id = UserDefaults.standard.value(forKey: "user_id") as? String ?? ""
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if id == "" {
+                LoginPage()
+            } else {
+                HomeScreen()
+            }
+           
         }
     }
 }
