@@ -24,52 +24,12 @@ struct LoginPage: View {
         NavigationView() {
             VStack(spacing: 25) {
                 InfoText(title: "Sign In").padding([.top, .bottom], 40)
-                
-                VStack() {
-                    ZStack(alignment: .trailing) {
-                        TextField("Enter Email", text: $email)
-                            .font(.system(size: 17))
-                            .foregroundColor(.primary)
-                            .frame(height: 50)
-                            .padding(.horizontal, 12)
-                            .background(Color.white)
-                            .cornerRadius(10.0)
-                            .autocapitalization(.none)
-                            .keyboardType(.emailAddress)
-                        
-                        Image(systemName: "envelope.fill")
-                            .foregroundColor(.gray)
-                            .padding()
-                    }
-                    
-                }
-                
-                VStack() {
-                    ZStack(alignment: .trailing) {
-                        SecureTextField(password: $password, isSecure: isSecure)
-                        Button {
-                            isSecure.toggle()
-                        } label: {
-                            Image(systemName: isSecure ? "eye.slash" : "eye")
-                                .accentColor(.gray)
-                        }
-                        .padding()
-                    }
-                }
-                
-                VStack(alignment: .leading, spacing: 20) {
-                    Button {
-                        loginUser()
-                        print("LogIn")
-                    } label: {
-                        Text("Sign In")
-                            .foregroundColor(.white)
-                            .frame(width: 215, height: 50, alignment: .center)
-                            .font(.system(size: 18, weight: .medium))
-                    }
-                    .background(Color.blue)
-                    .cornerRadius(10)
-                    
+                CustomTextField(email: $email, type: .emailAddress, capitalization: .none, placeHolder: "Enter Email", imageName: "envelope.fill")
+                SecureTextField(password: $password)
+
+                CustomButton(title: "Sign In") {
+                    loginUser()
+                    print("LogIn")
                 }
                 
                 NavigationLink(
@@ -141,7 +101,6 @@ struct LoginPage: View {
                         .cornerRadius(30)
                         
                         Button {
-                            
                             print("LogIn")
                         } label: {
                             Image(systemName: "phone.fill")
@@ -185,7 +144,6 @@ struct LoginPage: View {
         }
     }
     
-    
 }
 
 struct InfoText: View {
@@ -194,33 +152,6 @@ struct InfoText: View {
         Text(title)
             .font(.system(size: 25, weight: .bold))
             .foregroundColor(.accentColor)
-    }
-}
-
-struct SecureTextField: View {
-    @Binding var password: String
-    var isSecure: Bool
-    
-    var body: some View {
-        Group {
-            if isSecure {
-                SecureField("Enter Password", text: $password)
-                    .font(.system(size: 17))
-                    .foregroundColor(.primary)
-                    .frame(height: 50)
-                    .padding(.horizontal, 12)
-                    .background(Color.white)
-                    .cornerRadius(10.0)
-            } else {
-                TextField("Enter Password", text: $password)
-                    .font(.system(size: 17))
-                    .foregroundColor(.primary)
-                    .frame(height: 50)
-                    .padding(.horizontal, 12)
-                    .background(Color.white)
-                    .cornerRadius(10.0)
-            }
-        }
     }
 }
 

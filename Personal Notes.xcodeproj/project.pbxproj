@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		024EA76835830CEA3C6F804F /* Pods_Personal_Notes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35DB250EBED99069284AEF26 /* Pods_Personal_Notes.framework */; };
+		5B18421C2A7B531100761070 /* TextFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B18421B2A7B531100761070 /* TextFields.swift */; };
+		5B2DDAB72A66F5CF00BD085C /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2DDAB62A66F5CF00BD085C /* UITextView.swift */; };
+		5B2F18BE2A95ECC800E8EAEF /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2F18BD2A95ECC800E8EAEF /* Buttons.swift */; };
 		5B76D8AB2A51ABEC005DE0C7 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B76D8AA2A51ABEC005DE0C7 /* Users.swift */; };
 		5B7E95A62A570B9600165D48 /* AddNotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E95A52A570B9600165D48 /* AddNotes.swift */; };
 		5B9E27A72A547EB000014D5D /* Notes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E27A62A547EB000014D5D /* Notes.swift */; };
@@ -25,6 +28,9 @@
 
 /* Begin PBXFileReference section */
 		35DB250EBED99069284AEF26 /* Pods_Personal_Notes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Personal_Notes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B18421B2A7B531100761070 /* TextFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFields.swift; sourceTree = "<group>"; };
+		5B2DDAB62A66F5CF00BD085C /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
+		5B2F18BD2A95ECC800E8EAEF /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
 		5B76D8AA2A51ABEC005DE0C7 /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		5B7E95A52A570B9600165D48 /* AddNotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotes.swift; sourceTree = "<group>"; };
 		5B9E27A62A547EB000014D5D /* Notes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notes.swift; sourceTree = "<group>"; };
@@ -72,6 +78,16 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		5B2DDAB52A66F5BD00BD085C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5B2DDAB62A66F5CF00BD085C /* UITextView.swift */,
+				5B18421B2A7B531100761070 /* TextFields.swift */,
+				5B2F18BD2A95ECC800E8EAEF /* Buttons.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		5B76D8A92A51ABDF005DE0C7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -102,6 +118,7 @@
 		5BF0D2B12A473C7D009DF676 /* Personal Notes */ = {
 			isa = PBXGroup;
 			children = (
+				5B2DDAB52A66F5BD00BD085C /* Views */,
 				5B76D8A92A51ABDF005DE0C7 /* Models */,
 				5BF0D2C62A484457009DF676 /* GoogleService-Info.plist */,
 				5BF0D2B22A473C7D009DF676 /* Personal_NotesApp.swift */,
@@ -244,6 +261,8 @@
 				5BF0D2C32A475D69009DF676 /* AppDelegate.swift in Sources */,
 				5BF0D2C52A4760C5009DF676 /* SignUpPage.swift in Sources */,
 				5BF0D2C92A48AF15009DF676 /* HomeScreen.swift in Sources */,
+				5B2F18BE2A95ECC800E8EAEF /* Buttons.swift in Sources */,
+				5B2DDAB72A66F5CF00BD085C /* UITextView.swift in Sources */,
 				5BF0D2B52A473C7D009DF676 /* ContentView.swift in Sources */,
 				5BF0D2C12A473FEB009DF676 /* LoginPage.swift in Sources */,
 				5B7E95A62A570B9600165D48 /* AddNotes.swift in Sources */,
@@ -251,6 +270,7 @@
 				5BF0D2B32A473C7D009DF676 /* Personal_NotesApp.swift in Sources */,
 				5B76D8AB2A51ABEC005DE0C7 /* Users.swift in Sources */,
 				5BCC78A62A533CE3007D5256 /* MyNotes.swift in Sources */,
+				5B18421C2A7B531100761070 /* TextFields.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

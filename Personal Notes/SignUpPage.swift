@@ -51,7 +51,6 @@ struct SignUpPage: View {
                             message: Text("Choose an option"),
                             buttons: [
                                 .default(Text("Camera"), action: {
-                                    // Handle Option 1 selection
                                     print("Option 1 selected")
                                 }),
                                 .default(Text("Photos"), action: {
@@ -65,75 +64,22 @@ struct SignUpPage: View {
                     })
                     
                     .sheet(isPresented: $showImagePicker) {
-                        ImagePicker(selectedImage: $image)
+                        ImagePicker(selectedImage: $image, imageUrls: .constant([]), mode: .singleImage)
                     }
                     .frame(width: 100, height: 100, alignment: .center)
                     .background(Color.white)
                     .clipShape(Circle())
                     
-                    VStack() {
-                        ZStack(alignment: .trailing) {
-                            TextField("Enter Name", text: $name)
-                                .font(.system(size: 17))
-                                .foregroundColor(.primary)
-                                .frame(height: 50)
-                                .padding(.horizontal, 12)
-                                .background(Color.white)
-                                .cornerRadius(10.0)
-                            
-                            Image(systemName: "person.fill")
-                                .foregroundColor(.gray)
-                                .padding()
-                        }
-                        
+                    CustomTextField(email: $name, capitalization: .words, placeHolder: "Enter Username", imageName: "person.fill")
+                    CustomTextField(email: $email, type: .emailAddress, capitalization: .none, placeHolder: "Enter Email", imageName: "envelope.fill")
+                    SecureTextField(password: $password)
+                    
+                    CustomButton(title: "Sign Up") {
+                        self.isLoading = true
+                        self.registerUser()
+                        print("Sign Up")
                     }
                     
-                    VStack() {
-                        ZStack(alignment: .trailing) {
-                            TextField("Enter Email", text: $email)
-                                .font(.system(size: 17))
-                                .foregroundColor(.primary)
-                                .frame(height: 50)
-                                .padding(.horizontal, 12)
-                                .background(Color.white)
-                                .cornerRadius(10.0)
-                                .keyboardType(.emailAddress)
-                            Image(systemName: "envelope.fill")
-                                .foregroundColor(.gray)
-                                .padding()
-                        }
-                        
-                    }
-                    
-                    VStack() {
-                        ZStack(alignment: .trailing) {
-                            SecureTextField(password: $password, isSecure: isSecure)
-                            Button {
-                                isSecure.toggle()
-                            } label: {
-                                Image(systemName: isSecure ? "eye.slash" : "eye")
-                                    .accentColor(.gray)
-                            }
-                            .padding()
-                        }
-                    }
-                    
-                    VStack(alignment: .leading, spacing: 20) {
-                        Button {
-                            self.isLoading = true
-                            self.registerUser()
-                            print("LogIn")
-                        } label: {
-                            Text("Sign Up")
-                                .foregroundColor(.white)
-                                .frame(width: 215, height: 50, alignment: .center)
-                                .font(.system(size: 18, weight: .medium))
-                        }
-                        .disabled(isLoading)
-                        .background(Color.blue)
-                        .cornerRadius(10)
-                        
-                    }
                     NavigationLink(
                         destination: HomeScreen(),
                         isActive: $showHomeScreen,
@@ -200,9 +146,15 @@ struct SignUpPage: View {
 
 struct ImagePicker: UIViewControllerRepresentable {
     
+    enum Mode {
+        case singleImage, multipleImage
+    }
+    
     @Environment(\.presentationMode) private var presentationMode
     var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @Binding var selectedImage: UIImage?
+    @Binding var imageUrls: [String]
+    var mode: Mode
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
         let imagePicker = UIImagePickerController()
@@ -224,9 +176,16 @@ struct ImagePicker: UIViewControllerRepresentable {
             self.parent = parent
         }
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-            if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-                parent.selectedImage = image
+            if parent.mode == .singleImage {
+                if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+                    parent.selectedImage = image
+                }
+            } else if parent.mode == .multipleImage {
+                if let url = info[UIImagePickerController.InfoKey.imageURL] as? URL {
+                    parent.imageUrls.append(url.absoluteString)
+                }
             }
+            
             parent.presentationMode.wrappedValue.dismiss()
         }
         
